@@ -1,26 +1,16 @@
-import dynamic from "next/dynamic";
 import { Hero } from "../components/Hero";
 import { Sidebar } from "../components/Sidebar";
 import { EventBanner } from "../components/BannerEvent";
 import { LatestNewsSection } from "../components/article/LatestNewsSection";
 import { InfiniteScrollArticles } from "../components/InfiniteScrollArticles";
-import { FeaturedRow } from "../components/FeaturedRow"; // 1. Impor komponen baru
+import { FeaturedRow } from "../components/FeaturedRow";
 import {
   getAllArticles,
   getTrendingItems,
   getUpcomingEvents,
 } from "../lib/api";
 import { ArticleFeed } from "../components/ArticleFeed";
-
-const SliderNews = dynamic(
-  () => import("../components/slider/SliderNews").then((mod) => mod.SliderNews),
-  {
-    loading: () => (
-      <div className="h-96 w-full rounded-lg bg-gray-200 animate-pulse" />
-    ),
-    ssr: false,
-  }
-);
+import SliderNewsWrapper from "../components/slider/SliderNewsWrapper";
 
 export default async function HomePage() {
   const [allArticles, trendingItems, upcomingEvents] = await Promise.all([
@@ -57,7 +47,7 @@ export default async function HomePage() {
               title="Berita Terbaru"
               articles={latestArticles}
             />
-            <SliderNews articles={recommendationArticles} title="Rekomendasi" />
+            <SliderNewsWrapper articles={recommendationArticles} title="Rekomendasi" />
             <InfiniteScrollArticles articlesToLoad={dynamicLoadArticles} />
             <ArticleFeed
               initialArticles={initialLatestArticles}
