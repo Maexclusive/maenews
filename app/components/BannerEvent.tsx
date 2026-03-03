@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { Calendar, MapPin, Ticket } from "lucide-react";
-import { Event } from "@/app/types";
+import { Event } from "@/app/typing";
 import Link from "next/link";
 
 // Tipe data untuk sisa waktu
@@ -43,10 +43,10 @@ export function EventBanner({ events }: EventBannerProps) {
   useEffect(() => {
     setIsClient(true);
 
-    if (!activeEvent?.date) return;
+    if (!activeEvent?.startDate) return;
 
     const calculateTimeLeft = (): TimeLeft | null => {
-      const eventDate = new Date(activeEvent.date);
+      const eventDate = new Date(activeEvent.startDate);
       const difference = +eventDate - +new Date();
       if (difference > 0) {
         return {

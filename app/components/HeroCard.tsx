@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Article } from "@/app/types";
+import { Article } from "@/app/typing";
 import Image from "next/image"; // Impor komponen Image
 
 interface HeroCardProps {
@@ -26,7 +26,7 @@ export function HeroCard({ article, className }: HeroCardProps) {
     >
       {/* PERBAIKAN: Menggunakan komponen Image dari Next.js untuk optimasi */}
       <Image
-        src={article.imageUrl}
+        src={article.thumbnailUrl || article.imageUrl || ""}
         alt={article.title}
         fill
         unoptimized
@@ -37,9 +37,8 @@ export function HeroCard({ article, className }: HeroCardProps) {
 
       <div className="absolute bottom-0 left-0 p-5 sm:p-6 text-white w-full flex flex-col items-start">
         <span
-          className={`text-xs font-semibold uppercase px-3 py-1.5 rounded-full mb-3 transition-colors duration-300 ${
-            categoryStyles[article.category] || categoryStyles.default
-          }`}
+          className={`text-xs font-semibold uppercase px-3 py-1.5 rounded-full mb-3 transition-colors duration-300 ${categoryStyles[article.category] || categoryStyles.default
+            }`}
         >
           {article.category}
         </span>

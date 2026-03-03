@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
-import { Article } from "../types";
+import { Article } from "@/app/typing";
 import { formatRelativeTime } from "../utils/dateUtils";
 import Link from "next/link";
 import Image from "next/image";
@@ -27,9 +27,9 @@ export function NewsCard({ article, index }: NewsCardProps) {
           <Image
             width={400}
             height={225}
-            src={article.imageUrl}
+            src={article.thumbnailUrl || article.imageUrl || ""}
             alt={article.title}
-            unoptimized 
+            unoptimized
             className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
           />
         </div>
